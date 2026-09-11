@@ -1,0 +1,572 @@
+\<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ŞML STORE - Rəsmi Oyun Valyutaları & Jeton Mağazası</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background-color: #020617;
+      color: #94a3b8;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .top-left a {
+      color: #94a3b8;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .top-left i {
+      color: #f59e0b;
+      margin-right: 5px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: #94a3b8;
+      font-size: 15px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: #f59e0b;
+    }
+
+    .btn-top-balance {
+      background-color: #f59e0b;
+      color: #000;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Header & Navbar */
+    .navbar {
+      background-color: #1e293b;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      font-weight: 900;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover {
+      color: #f59e0b;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 9px 40px 9px 16px;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 20px;
+      outline: none;
+      width: 220px;
+      font-size: 13px;
+    }
+
+    .search-box button {
+      position: absolute;
+      right: 4px;
+      background-color: #f59e0b;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: #000;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      width: 90%;
+      margin: 25px auto;
+      background: linear-gradient(135deg, #1e1b4b, #312e81, #f59e0b);
+      border-radius: 20px;
+      padding: 40px;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      font-size: 15px;
+      margin-bottom: 22px;
+      color: #cbd5e1;
+    }
+
+    .btn-whatsapp-hero {
+      background-color: #22c55e;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      margin: 30px auto;
+    }
+
+    /* Category Block */
+    .category-block {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 40px;
+      border: 1px solid #334155;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-left: 5px solid #f59e0b;
+      padding-left: 14px;
+    }
+
+    .category-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .product-table th {
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #94a3b8;
+      background-color: #0f172a;
+      border-bottom: 2px solid #334155;
+    }
+
+    .product-table td {
+      padding: 16px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      border-bottom: 1px solid #334155;
+    }
+
+    .col-name { width: 45%; color: #f8fafc; font-weight: 700; }
+    .col-oldprice { width: 20%; color: #64748b; text-decoration: line-through; font-size: 13px; }
+    .col-price { width: 20%; color: #10b981; font-weight: 800; font-size: 16px; }
+    .col-action { width: 15%; text-align: right; }
+
+    .btn-satin-al {
+      background-color: #f59e0b;
+      color: #000;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-satin-al:hover {
+      background-color: #d97706;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Floating WhatsApp */
+    .float-whatsapp {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #22c55e;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      text-decoration: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="#"><i class="fa-solid fa-shield-halved"></i> 100% Güvənli Satış</a>
+      <a href="https://wa.me/994504608832" target="_blank"><i class="fa-solid fa-headset"></i> 7/24 Dəstək</a>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://wa.me/994504608832" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+
+    <div class="top-right">
+      <button class="btn-top-balance" onclick="buyItem('Balans Artırmaq', '0 ₼')">
+        <i class="fa-solid fa-wallet"></i> Balans Yüklə
+      </button>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo-badge">🦅 ŞML STORE</div>
+
+    <ul class="nav-menu">
+      <li><a href="#pubg-section">PUBG UC</a></li>
+      <li><a href="#freefire-section">FREE FIRE</a></li>
+      <li><a href="#tiktok-section">TIKTOK JETON</a></li>
+      <li><a href="#">BALANS ARTIR</a></li>
+    </ul>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Məhsul axtar...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Rəsmi Oyun Valyutaları Və TikTok Jetonları</h1>
+      <p>ID nömrənizə 3 dəqiqə ərzində anında yükləmə. Ən sərfəli xidmət yalnız ŞML Store-da!</p>
+      <a href="https://wa.me/994504608832" target="_blank" class="btn-whatsapp-hero">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp Sifariş Xətti
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- PUBG MOBILE UC TABLE -->
+    <div class="category-block" id="pubg-section">
+      <div class="category-header">
+        <h2 class="category-title"><i class="fa-solid fa-gamepad" style="color: #f59e0b;"></i> PUBG Mobile UC</h2>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Məhsul Adı</th>
+            <th>Əvvəlki Qiymət</th>
+            <th>Cari Qiymət</th>
+            <th style="text-align: right;">Sifariş</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">60 UC</td>
+            <td class="col-oldprice">4.00 ₼</td>
+            <td class="col-price">3.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 60 UC', '3.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">120 UC</td>
+            <td class="col-oldprice">6.50 ₼</td>
+            <td class="col-price">5.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 120 UC', '5.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">180 UC</td>
+            <td class="col-oldprice">9.00 ₼</td>
+            <td class="col-price">7.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 180 UC', '7.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">325 UC</td>
+            <td class="col-oldprice">12.50 ₼</td>
+            <td class="col-price">10.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 325 UC', '10.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">385 UC</td>
+            <td class="col-oldprice">15.00 ₼</td>
+            <td class="col-price">12.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 385 UC', '12.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">660 UC</td>
+            <td class="col-oldprice">22.00 ₼</td>
+            <td class="col-price">18.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 660 UC', '18.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">720 UC</td>
+            <td class="col-oldprice">24.00 ₼</td>
+            <td class="col-price">20.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 720 UC', '20.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">780 UC</td>
+            <td class="col-oldprice">26.00 ₼</td>
+            <td class="col-price">22.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 780 UC', '22.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">840 UC</td>
+            <td class="col-oldprice">28.00 ₼</td>
+            <td class="col-price">24.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 840 UC', '24.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">985 UC</td>
+            <td class="col-oldprice">31.00 ₼</td>
+            <td class="col-price">27.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 985 UC', '27.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">1800 UC</td>
+            <td class="col-oldprice">52.00 ₼</td>
+            <td class="col-price">45.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 1800 UC', '45.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">3850 UC</td>
+            <td class="col-oldprice">95.00 ₼</td>
+            <td class="col-price">85.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 3850 UC', '85.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">8100 UC</td>
+            <td class="col-oldprice">180.00 ₼</td>
+            <td class="col-price">166.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('PUBG 8100 UC', '166.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">180 UC + 9 Parçacıq</td>
+            <td class="col-oldprice">10.00 ₼</td>
+            <td class="col-price">8.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('180 UC + 9 Parçacıq', '8.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">300 UC + 79 Amblem</td>
+            <td class="col-oldprice">14.00 ₼</td>
+            <td class="col-price">11.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('300 UC + 79 Amblem', '11.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FREE FIRE TABLE -->
+    <div class="category-block" id="freefire-section">
+      <div class="category-header">
+        <h2 class="category-title"><i class="fa-solid fa-fire" style="color: #ef4444;"></i> Free Fire Almaz</h2>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Məhsul Adı</th>
+            <th>Əvvəlki Qiymət</th>
+            <th>Cari Qiymət</th>
+            <th style="text-align: right;">Sifariş</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">110 Almaz</td>
+            <td class="col-oldprice">3.00 ₼</td>
+            <td class="col-price">2.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('Free Fire 110 Almaz', '2.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">341 Almaz</td>
+            <td class="col-oldprice">7.00 ₼</td>
+            <td class="col-price">6.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('Free Fire 341 Almaz', '6.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">572 Almaz</td>
+            <td class="col-oldprice">11.00 ₼</td>
+            <td class="col-price">9.50 ₼</td>
+            <td class="col-action"><button onclick="buyItem('Free Fire 572 Almaz', '9.50 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">1166 Almaz</td>
+            <td class="col-oldprice">20.00 ₼</td>
+            <td class="col-price">17.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('Free Fire 1166 Almaz', '17.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">Free Fire Həftəlik Üvlük</td>
+            <td class="col-oldprice">5.00 ₼</td>
+            <td class="col-price">4.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('Free Fire Həftəlik Üvlük', '4.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TIKTOK JETON TABLE -->
+    <div class="category-block" id="tiktok-section">
+      <div class="category-header">
+        <h2 class="category-title"><i class="fa-brands fa-tiktok" style="color: #00f2fe;"></i> TikTok Jeton</h2>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Məhsul Adı</th>
+            <th>Əvvəlki Qiymət</th>
+            <th>Cari Qiymət</th>
+            <th style="text-align: right;">Sifariş</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">70 TikTok Jeton</td>
+            <td class="col-oldprice">3.00 ₼</td>
+            <td class="col-price">2.50 ₼</td>
+            <td class="col-action"><button onclick="buyItem('70 TikTok Jeton', '2.50 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">350 TikTok Jeton</td>
+            <td class="col-oldprice">12.00 ₼</td>
+            <td class="col-price">10.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('350 TikTok Jeton', '10.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+          <tr>
+            <td class="col-name">700 TikTok Jeton</td>
+            <td class="col-oldprice">22.00 ₼</td>
+            <td class="col-price">19.00 ₼</td>
+            <td class="col-action"><button onclick="buyItem('700 TikTok Jeton', '19.00 ₼')" class="btn-satin-al"><i class="fa-solid fa-cart-shopping"></i> AL</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/994504608832" target="_blank" class="float-whatsapp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const BOT_TOKEN = "8913723576:AAE4i-pp8Ji9mwTf9U8n5Fw_95gjoNQwnKc";
+    const CHAT_ID = "8642917686";
+    const PHONE_NUMBER = "994504608832";
+
+    function buyItem(name, price) {
+      const playerId = prompt(`"${name}" üçün İstifadəçi ID nömrənizi (və ya Nickname) daxil edin:`);
+      if (!playerId) return;
+
+      const userPhone = prompt("Əlaqə üçün WhatsApp nömrənizi daxil edin:");
+      if (!userPhone) return;
+
+      const tgMessage = `🦅 *ŞML STORE - YENİ SİFARİŞ*\n\n🎮 *Məhsul:* ${name}\n💰 *Qiymət:* ${price}\n🆔 *Player/İstifadəçi ID:* \`${playerId}\`\n📞 *Telefon:* ${userPhone}`;
+
+      // Telegram Bota bildiriş göndərilir
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: tgMessage, parse_mode: 'Markdown' })
+      });
+
+      // WhatsApp-a yönləndirilir
+      const waMsg = encodeURIComponent(`Salam, ŞML Store!\nSifariş etmək istəyirəm:\n\n🎮 Məhsul: ${name}\n💰 Qiymət: ${price}\n🆔 Player ID / Nick: ${playerId}\n📞 Nömrə: ${userPhone}`);
+      window.location.href = `https://wa.me/${PHONE_NUMBER}?text=${waMsg}`;
+    }
+
+    function searchProducts() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('.product-table tbody tr');
+
+      rows.forEach(row => {
+        const text = row.querySelector('.col-name').innerText.toLowerCase();
+        if (text.includes(input)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
